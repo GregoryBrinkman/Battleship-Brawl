@@ -1,0 +1,15 @@
+* Battleship Brawl!!!
+** Accept 2 clients
+
+** Randomize first player
+
+** Both players place all ships
+
+** Input 2 char
+
+** If hit, respond 'hit'
+** If sunk, say 'you sunk my' + battleshipName
+
+** Otherwise, 'miss'
+
+** Keep track of both players boards(hits, misses and ship placement), number of turns, and winner
