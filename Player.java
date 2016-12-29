@@ -5,10 +5,12 @@ class Player{
     }
 
     Board board;
-    // Ship 
 
     public Player(){
         this.board = new Board();
     }
 
+    void guess(int location){
+        
+    }
 }
