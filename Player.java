@@ -1,7 +1,13 @@
+import java.util.*;
+
 class Player{
     public static void main(String[] args){
+        Scanner scan = new Scanner(System.in);
         Player p = new Player();
         p.board.printBoard();
+        while(!p.board.finished()){
+            System.out.println(p.board.guess(scan.nextInt()));
+        }
     }
 
     Board board;
@@ -10,7 +16,4 @@ class Player{
         this.board = new Board();
     }
 
-    void guess(int location){
-        
-    }
 }

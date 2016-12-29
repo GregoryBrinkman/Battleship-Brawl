@@ -1,7 +1,10 @@
+//make so you can't guess previous guesses
+
 enum Shiptype {Carrier, Battleship, Cruiser, Submarine, Destroyer};
 
 class Board{
     int [][] board;
+    int [] guesses;
     Ship [] shipArray;
 
     public Board(){
@@ -33,6 +36,23 @@ class Board{
             System.out.println();
         }
         System.out.println();
+    }
+
+    String guess(int location){
+        int guess = board[location/10][location%10];
+        if(guess == 0){
+            return "Miss!";
+        }else{
+            for(Ship s: shipArray)
+                if(s.getMarker() == guess){
+                    s.hit();
+                    if(s.isSunk()){
+                        removeShip(s);
+                        return "Hit! You sunk my " + s.getType() + "!";
+                    }
+                }
+            return "Hit!";
+        }
     }
 
     boolean placeShip(Ship s, int start, char direction){
@@ -112,6 +132,14 @@ class Board{
     boolean occupied(int location){
         if(board[location/10][location%10] == 0)
             return false;
+        return true;
+    }
+
+    boolean finished(){
+        for(int i = 0; i< 10; i++)
+            for(int j = 0; j<10; j++)
+                if(board[i][j] != 0)
+                    return false;
         return true;
     }
 
