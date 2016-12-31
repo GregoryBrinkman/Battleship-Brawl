@@ -1,15 +1,14 @@
 * Battleship Brawl!!!
-** Accept 2 clients
-
-** Randomize first player
-
-** Both players place all ships
-
-** Input 2 char
-
-** If hit, respond 'hit'
-** If sunk, say 'you sunk my' + battleshipName
-
-** Otherwise, 'miss'
-
-** Keep track of both players boards(hits, misses and ship placement), number of turns, and winner
+** Server
+*** Accept 2 players
+*** Randomize first player
+** Player
+*** Place Ships, Input: (ShipType, Int 0-99, 'H'/'V')
+*** Guess Loop, Input: Int 0-99
+** Board
+*** Put Ships right places
+*** Guess on the board, response is either 
+    - 'Hit!'
+    - 'Miss!'
+    - 'Hit! You sunk my ' + shipName + '!'
+**** Keep track of both players boards(hits, misses and ship placement), number of turns, and winner
