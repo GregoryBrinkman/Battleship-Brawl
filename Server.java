@@ -2,29 +2,39 @@ import java.net.*;
 import java.io.*;
 
 class Server{
+
+    static BufferedReader in;
+    static PrintWriter out;
+
     public static void main(String [] args){
-        
-        try{
-        ServerSocket serverSocket = new ServerSocket(5739);
         while(true){
-                Socket clientSocket = serverSocket.accept();
-                PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
-                BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-                String inputLine;
+            socketInit();
+            String inputLine;
+
+            try{
+
                 while ((inputLine = in.readLine()) != null) {
-                    readInput(inputLine);
-                    if (inputLine.equals("Bye."))
-                        break;
+                    System.out.println("Hit!");
+                    if (inputLine.equals("brinkman")){
+                        System.out.println("Correct!");
+                        out.println("Hello World!");
+                    }
+                    break;
                 }
+
+            }catch(IOException e){e.printStackTrace();}
         }
+    }
+
+
+
+    static void socketInit(){
+        try{
+            ServerSocket serverSocket = new ServerSocket(5739);
+            Socket clientSocket = serverSocket.accept();
+            out = new PrintWriter(clientSocket.getOutputStream(), true);
+            in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
         }catch(IOException e){e.printStackTrace();}
     }
 
-    static void readInput(String inputLine){
-        try{
-            System.out.println(Integer.parseInt(inputLine));
-        }catch(NumberFormatException e){
-            System.out.println("Input an Integer ya silly");
-        }
-    }
 }
