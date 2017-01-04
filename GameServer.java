@@ -37,8 +37,8 @@ class GameServer implements Runnable{
         Socket s;
         try{
             while(acceptedClients < maxNumClients){
-                // if((s = acceptedClient(serverSocket.accept())) != null){
-                if((s = testAccept(serverSocket.accept())) != null){
+                if((s = acceptedClient(serverSocket.accept())) != null){
+                // if((s = testAccept(serverSocket.accept())) != null){
                     exec.execute(new AcceptHandler(s));
                     acceptedClients++;
                     System.out.print("acceptedClients: " + acceptedClients);
@@ -48,7 +48,7 @@ class GameServer implements Runnable{
         exec.shutdown();
     }
 
-    Socket testAccept(Socket s){return s;}
+    // Socket testAccept(Socket s){return s;}
     Socket acceptedClient(Socket s){
         String inputLine;
 
@@ -56,6 +56,7 @@ class GameServer implements Runnable{
             BufferedReader in = new BufferedReader(new InputStreamReader(s.getInputStream()));
             inputLine = in.readLine();
             if (inputLine.equals("brinkman")){
+                System.out.println("THEY'RE IN THE MAINFRAME");
                 return s;
             }
             PrintWriter out = new PrintWriter(s.getOutputStream(), true);
@@ -71,15 +72,17 @@ class AcceptHandler implements Runnable{
 
     private BufferedReader in;
     private PrintWriter out;
+    private Player play;
 
     public void run(){
         grabIO();
-
+        play = new Player(in, out);
         String inputLine;
         try{
-
+            out.println("Hello!");
             while ((inputLine = in.readLine()) != null) {
-                System.out.println("Hit!");
+                System.out.println(inputLine);
+                out.println(inputLine);
             }
         }catch(IOException e){e.printStackTrace();}
     }
